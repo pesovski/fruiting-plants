@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Овошки - садници</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="main.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="app">
+            <div id="fruits-container" v-if="showFruitSelector">
+                <div v-for="fruitgroup in fruits">
+                    <h1>{{fruitgroup.name}}</h1>
+                    <div v-for="(fruit, fruitcode) in fruitgroup.data" class="select-fruit" @click="getFruit(fruitcode)">
+                        <img v-bind:src="'images/'+fruitcode+'/'+fruit.image" class="select-fruit-image"/>
+                        <span class="select-fruit-name">{{fruit.name}}</span>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+            <div class="flex flex-column" v-if="showFruitData">
+                <div class="column left text-center column-one flex flex-column align-center">
+                    <img v-for="image in plant.images" v-bind:src="'images/'+plant.code+'/'+image" class="fruit-image"/>
+                </div>
+                <div class="column right column-zero fruit-info">
+                    <div class="btn-goback" @click="toggleFruitSelector">Друга овошка...</div>
+                    <div class="variety"><b>{{plant.variety}}</b></div>
+                    <div v-if="plant.blossoming"><b>Цути:</b> {{plant.blossoming}}</div>
+                    <div v-if="plant.ripening"><b>Зрее:</b> {{plant.ripening}}</div>
+                    
+                    <button v-on:click="toggleMore" v-if="Object.keys(plant.more).length" class="btn-more">Повеќе...</button>
+                    
+                    <div class="more" v-show="showMore">
+                        <div v-if="count(plant.more.fruit)">
+                            <div>Плод:</div>
+                            <ul>
+                                <li v-for="fruit in plant.more.fruit">{{fruit}}</li>
+                            </ul>
+                        </div>
+                        <div v-if="count(plant.more.facts)">
+                            <div>Занимливости:</div>
+                            <ul class="facts">
+                                <li v-for="facts in plant.more.facts">{{facts}}</li>
+                                <li v-if="plant.readMoreLink"><a :href="plant.readMoreLink">{{plant.readMoreLink}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <script src="scripts/vue.js"></script>
+       <script src="scripts/axios.js"></script>
+       <script>
+        //    var url = "http://localhost:8080/pesovski.mk";
+           var url = "https://pesovski.mk";
+           var vue = new Vue({
+               el: "#app",
+               data: {
+                    showMore: false,
+                    showFruitSelector: true,
+                    plant: {},
+                    fruits: {}
+               },
+               computed: {
+                    showFruitData: function() {
+                        return this.count(this.plant) && !this.showFruitSelector;
+                    }
+               },
+               methods: {
+                   count: function(obj) {
+                       return Object.keys(obj).length;
+                   },
+                   toggleMore: function() {
+                       this.showMore = !this.showMore;
+                   },
+                   getFruit(fruitcode) {                      
+                       axios.get(`${url}/sadnici/data/${fruitcode}.json`).then(response => {
+                           this.plant = response.data;
+                           this.showFruitSelector = false;
+                           this.showMore = false;
+                       })
+                   },
+                   toggleFruitSelector() {
+                       this.showFruitSelector = true;
+                   }
+               },
+               created() {
+                    axios.get(`${url}/sadnici/data/map.json`).then(response => {
+                       this.fruits = response.data;
+                    });
+                }
+           });
+       </script>
+    </body>
+</html>

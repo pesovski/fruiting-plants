@@ -1,0 +1,71 @@
+{
+    "group-one": {
+        "name": "Модри сливи",
+        "data": {
+            "cacanska-rana": {
+                "name": "Чачанска рана",
+                "image": "Cacanska_rana1.gif"
+            },
+            "cacanska-rodna": {
+                "name": "Чачанска родна",
+                "image": "Cacanska_rodna1.gif"
+            },
+            "cacanska-lepotica": {
+                "name": "Чачанска лепотица",
+                "image": "Cacanska_lepotica3.gif"
+            }
+        }
+    },
+    "group-two": {
+        "name": "Цреши",
+        "data": {
+            "samberst": {
+                "name": "Самберст",
+                "image": "Samberst5.jpg"
+            },
+            "kordia": {
+                "name": "Кордиа",
+                "image": "Kordia6.jpg"
+            }
+        }
+    },
+    "group-three": {
+        "name": "Вишни",
+        "data": {
+            "oblacinska": {
+                "name": "Облачинска",
+                "image": "Oblacinska1.jpg"
+            }
+        }
+    },
+    "group-four": {
+        "name": "Круши",
+        "data": {
+            "santa-maria": {
+                "name": "Санта Марија",
+                "image": "Santa-maria1.jpg"
+            },
+            "junska-ubavica": {
+                "name": "Јунска Убавица",
+                "image": "Junska-lepotica1.jpg"
+            },
+            "kalugerka": {
+                "name": "Калуѓерка",
+                "image": "Kalugerka1.jpg"
+            },
+            "viljamovka": {
+                "name": "Виљамовка",
+                "image": "Viljamovka1.jpg"
+            }
+        }
+    },
+    "group-five": {
+        "name": "Праски",
+        "data": {
+            "krest-heven": {
+                "name": "Крест Хевен",
+                "image": "Krest-heven1.jpg"
+            }
+        }
+    }
+}
